@@ -3,6 +3,8 @@
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+/elk
+/logs
 
 # Email spool folder
 /app/spool/*
@@ -46,3 +48,6 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+# Docker
+docker-compose.yml
