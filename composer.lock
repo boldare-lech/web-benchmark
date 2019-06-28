@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50397bde473c6b6402dd1c3b263dca60",
+    "content-hash": "00f28974091be25564bb0e2e3e066c4a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6594,7 +6594,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "sensio/framework-extra-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
