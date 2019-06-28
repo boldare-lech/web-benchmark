@@ -69,3 +69,7 @@ docker-compose.yml
 .phpunit
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+.idea
+
+docker-compose.yml
