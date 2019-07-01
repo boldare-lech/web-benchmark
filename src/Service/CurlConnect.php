@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Interfaces\Service\CurlConnectInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-class CurlConnect
+class CurlConnect implements CurlConnectInterface
 {
     private const TIMEOUT = 30;
 
