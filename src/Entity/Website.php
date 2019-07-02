@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use phpDocumentor\Reflection\Types\This;
 use \ArrayAccess;
+use \Throwable;
 
 
 /**
@@ -31,6 +32,10 @@ class Website implements WebsiteInterface
      */
     protected $finishLoadingTime;
 
+    /**
+     * @var Throwable
+     */
+    protected $exception;
 
     public function __construct(string $url)
     {
@@ -120,5 +125,23 @@ class Website implements WebsiteInterface
         $this->otherWebsites[] = $website;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setException(\Throwable $exception): WebsiteInterface
+    {
+        $this->setException($exception);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getException(): \Throwable
+    {
+        return $this->exception;
     }
 }

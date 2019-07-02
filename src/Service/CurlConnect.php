@@ -28,7 +28,7 @@ class CurlConnect implements CurlConnectInterface
         curl_close($ch);
 
         if (!$data) {
-            throw new Exception("$url could not be reached.");
+            throw new \Exception("$url could not be reached.");
         }
     }
 
@@ -38,7 +38,7 @@ class CurlConnect implements CurlConnectInterface
     private function assertUrlIsValid(string $url): void
     {
         if(!filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new Exception('Please provide a valid url');
+            throw new \Exception('Please provide a valid url');
         }
     }
 }

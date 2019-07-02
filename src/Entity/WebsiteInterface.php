@@ -26,8 +26,9 @@ interface WebsiteInterface
 
     /**
      * @param string $url
+     * @return WebsiteInterface
      */
-    public function setUrl(string $url);
+    public function setUrl(string $url): WebsiteInterface;
 
     /**
      * @return ArrayAccess
@@ -36,8 +37,9 @@ interface WebsiteInterface
 
     /**
      * @param ArrayAccess $otherUrls
+     * @return WebsiteInterface
      */
-    public function setOtherWebsites(ArrayAccess $otherUrls);
+    public function setOtherWebsites(ArrayAccess $otherUrls): WebsiteInterface;
 
     /**
      * @return float
@@ -47,22 +49,34 @@ interface WebsiteInterface
     /**
      * @param float $startLoadingTime
      *
-     * @return This
+     * @return WebsiteInterface
      */
-    public function setStartLoadingTime(float $startLoadingTime);
+    public function setStartLoadingTime(float $startLoadingTime): WebsiteInterface;
 
     /**
-     * @return This
+     * @return float
      */
     public function getFinishLoadingTime(): float;
 
     /**
      * @param float $finishLoadingTime
+     * @return WebsiteInterface
      */
-    public function setFinishLoadingTime(float $finishLoadingTime);
+    public function setFinishLoadingTime(float $finishLoadingTime): WebsiteInterface;
 
     /**
      * @param WebsiteInterface $website
      */
     public function addOtherWebsite(WebsiteInterface $website);
+
+    /**
+     * @param \Throwable $exception
+     * @return WebsiteInterface
+     */
+    public function setException(\Throwable $exception): WebsiteInterface;
+
+    /**
+     * @return \Throwable
+     */
+    public function getException(): \Throwable;
 }

@@ -59,7 +59,7 @@ class WebBenchmarkCommand extends Command
             ->addArgument(
                 WebsiteInterface::OTHER_WEBSITES_FIELD,
                 InputArgument::REQUIRED,
-                'Urls of websites to compare, divided with ' . WebsiteInterface::DELIMITER
+                'Urls of websites to compare, divided with "' . WebsiteInterface::DELIMITER . '"'
             );
 
     }
