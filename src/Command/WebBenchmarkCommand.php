@@ -3,10 +3,12 @@
 
 namespace App\Command;
 
+use App\Interfaces\Entity\WebsiteInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
 
 /**
  * Class WebBenchmarkCommand
@@ -22,6 +24,8 @@ class WebBenchmarkCommand extends Command
 
     /**
      * Command configuration
+     *
+     * @return void
      */
     protected function configure(): void
     {
@@ -34,12 +38,12 @@ class WebBenchmarkCommand extends Command
                 'php bin/console app:web-benchmark test.url test2.com,test3com'
             )
             ->addArgument(
-                'websiteUrl',
+                WebsiteInterface::WEBSITE_FIELD,
                 InputArgument::REQUIRED,
                 'Url of website to benchmark'
             )
             ->addArgument(
-                'otherWebsitesUrls',
+                WebsiteInterface::OTHER_WEBSITES_FIELD,
                 InputArgument::REQUIRED,
                 'Urls of websites to compare, divide with coma'
             );
@@ -56,7 +60,6 @@ class WebBenchmarkCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): string
     {
-
         $arguments = $input->getArguments();
     }
 
