@@ -21,5 +21,8 @@ class WebsiteBenchmarkHandler
         $website = $this->creator->create($arguments);
 
         $this->benchmarker->benchmark($website);
+
+        var_dump($website);die;
+
     }
 }

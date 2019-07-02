@@ -130,9 +130,9 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function setException(\Throwable $exception): WebsiteInterface
+    public function setException(Throwable $exception): WebsiteInterface
     {
-        $this->setException($exception);
+        $this->exception = $exception;
 
         return $this;
     }
@@ -140,7 +140,7 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function getException(): \Throwable
+    public function getException(): Throwable
     {
         return $this->exception;
     }

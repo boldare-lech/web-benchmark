@@ -72,7 +72,7 @@ class WebBenchmarkCommand extends Command
      *
      * @return string
      */
-    protected function execute(InputInterface $input, OutputInterface $output): string
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->handler->handle($input->getArguments());
     }
