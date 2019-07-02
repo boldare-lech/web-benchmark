@@ -1,7 +1,5 @@
 FROM alpine:3.8
 
-MAINTAINER Marcin Tanasiewicz <m@tanasiewicz.pl>
-
 RUN apk add --update --no-cache nginx
 
 COPY nginx.conf /etc/nginx/

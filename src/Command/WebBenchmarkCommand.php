@@ -1,0 +1,63 @@
+<?php
+
+
+namespace App\Command;
+
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * Class WebBenchmarkCommand
+ *
+ * @package App\Command
+ */
+class WebBenchmarkCommand extends Command
+{
+    /**
+     * @var string
+     */
+    protected static $defaultName = 'app:web-benchmark';
+
+    /**
+     * Command configuration
+     */
+    protected function configure(): void
+    {
+        $this
+            ->setDescription('Creates benchmark report')
+            ->setHelp(
+                'benchmark loading time of the website in comparison to the other websites (check how fast is the website\'s loading time in comparison to other competitors).'
+            )
+            ->addUsage(
+                'php bin/console app:web-benchmark test.url test2.com,test3com'
+            )
+            ->addArgument(
+                'websiteUrl',
+                InputArgument::REQUIRED,
+                'Url of website to benchmark'
+            )
+            ->addArgument(
+                'otherWebsitesUrls',
+                InputArgument::REQUIRED,
+                'Urls of websites to compare, divide with coma'
+            );
+
+    }
+
+    /**
+     * Command execution
+     *
+     * @param InputInterface  $input  Input
+     * @param OutputInterface $output Output
+     *
+     * @return string
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): string
+    {
+
+        $arguments = $input->getArguments();
+    }
+
+}

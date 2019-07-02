@@ -8,6 +8,7 @@
         "php": "^7.2.9",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-curl": "*",
         "sensio/framework-extra-bundle": "^5.3@dev",
         "symfony/asset": "*",
         "symfony/console": "*",
