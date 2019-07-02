@@ -1,5 +1,5 @@
 <?php
-namespace App\Interfaces\Service;
+namespace App\Service;
 
 interface CurlConnectInterface
 {

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Interfaces\Service\CurlConnectInterface;
+use App\Service\CurlConnectInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CurlConnect implements CurlConnectInterface

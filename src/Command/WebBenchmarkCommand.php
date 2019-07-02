@@ -3,11 +3,14 @@
 
 namespace App\Command;
 
-use App\Interfaces\Entity\WebsiteInterface;
+use App\Entity\WebsiteInterface;
+
+use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 
 /**
@@ -17,6 +20,17 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class WebBenchmarkCommand extends Command
 {
+    protected $handler;
+
+    public function __construct(
+        WebsiteBenchmarkHandler $handler
+    ) {
+        $this->handler = $handler;
+
+        parent::__construct();
+    }
+
+
     /**
      * @var string
      */
@@ -35,7 +49,7 @@ class WebBenchmarkCommand extends Command
                 'benchmark loading time of the website in comparison to the other websites (check how fast is the website\'s loading time in comparison to other competitors).'
             )
             ->addUsage(
-                'php bin/console app:web-benchmark test.url test2.com,test3com'
+                'app:web-benchmark test.com test2.com,test3com'
             )
             ->addArgument(
                 WebsiteInterface::WEBSITE_FIELD,
@@ -45,7 +59,7 @@ class WebBenchmarkCommand extends Command
             ->addArgument(
                 WebsiteInterface::OTHER_WEBSITES_FIELD,
                 InputArgument::REQUIRED,
-                'Urls of websites to compare, divide with coma'
+                'Urls of websites to compare, divided with ' . WebsiteInterface::DELIMITER
             );
 
     }
@@ -60,7 +74,7 @@ class WebBenchmarkCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): string
     {
-        $arguments = $input->getArguments();
+        $this->handler->handle($input->getArguments());
     }
 
 }

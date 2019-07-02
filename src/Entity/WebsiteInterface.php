@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Interfaces\Entity;
+namespace App\Entity;
 
 
 use phpDocumentor\Reflection\Types\This;
@@ -17,6 +17,8 @@ interface WebsiteInterface
 
     const OTHER_WEBSITES_FIELD = 'otherWebsitesUrls';
 
+    const DELIMITER = ',';
+
     /**
      * @return string
      */
@@ -24,22 +26,18 @@ interface WebsiteInterface
 
     /**
      * @param string $url
-     *
-     * @return This
      */
-    public function setUrl(string $url): This;
+    public function setUrl(string $url);
 
     /**
      * @return ArrayAccess
      */
-    public function getOtherUrls(): ArrayAccess;
+    public function getOtherWebsites(): ArrayAccess;
 
     /**
      * @param ArrayAccess $otherUrls
-     *
-     * @return This
      */
-    public function setOtherUrls(ArrayAccess $otherUrls): This;
+    public function setOtherWebsites(ArrayAccess $otherUrls);
 
     /**
      * @return float
@@ -51,7 +49,7 @@ interface WebsiteInterface
      *
      * @return This
      */
-    public function setStartLoadingTime(float $startLoadingTime): This;
+    public function setStartLoadingTime(float $startLoadingTime);
 
     /**
      * @return This
@@ -60,8 +58,11 @@ interface WebsiteInterface
 
     /**
      * @param float $finishLoadingTime
-     *
-     * @return This
      */
-    public function setFinishLoadingTime(float $finishLoadingTime): This;
+    public function setFinishLoadingTime(float $finishLoadingTime);
+
+    /**
+     * @param WebsiteInterface $website
+     */
+    public function addOtherWebsite(WebsiteInterface $website);
 }

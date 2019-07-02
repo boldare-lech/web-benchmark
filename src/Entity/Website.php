@@ -1,8 +1,9 @@
 <?php
 
-use App\Entity\WebsiteCollection;
-use App\Interfaces\Entity\WebsiteInterface;
+namespace App\Entity;
+
 use phpDocumentor\Reflection\Types\This;
+use \ArrayAccess;
 
 
 /**
@@ -16,9 +17,9 @@ class Website implements WebsiteInterface
     protected $url;
 
     /**
-     * @var WebsiteCollection
+     * @var WebsitesCollection
      */
-    protected $otherUrls;
+    protected $otherWebsites;
 
     /**
      * @var float
@@ -30,6 +31,13 @@ class Website implements WebsiteInterface
      */
     protected $finishLoadingTime;
 
+
+    public function __construct(string $url)
+    {
+        $this->url = $url;
+        $this->otherWebsites = new WebsitesCollection();
+    }
+
     /**
      * @inheritDoc
      */
@@ -37,11 +45,10 @@ class Website implements WebsiteInterface
     {
         return $this->url;
     }
-
     /**
      * @inheritDoc
      */
-    public function setUrl(string $url): This
+    public function setUrl(string $url): WebsiteInterface
     {
         $this->url = $url;
 
@@ -51,17 +58,20 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function getOtherUrls(): ArrayAccess
+    public function getOtherWebsites(): ArrayAccess
     {
-        return $this->otherUrls;
+        return $this->otherWebsites;
     }
 
     /**
-     * @param mixed $otherUrls
+     * @param WebsitesCollection $otherUrls Websites Collection
+     *
+     *
+     * @return This
      */
-    public function setOtherUrls($otherUrls): This
+    public function setOtherWebsites(\ArrayAccess $otherUrls): WebsiteInterface
     {
-        $this->otherUrls = $otherUrls;
+        $this->otherWebsites = $otherUrls;
 
         return $this;
     }
@@ -77,7 +87,7 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function setStartLoadingTime(float $startLoadingTime): This
+    public function setStartLoadingTime(float $startLoadingTime): WebsiteInterface
     {
         $this->startLoadingTime = $startLoadingTime;
 
@@ -95,9 +105,19 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function setFinishLoadingTime($finishLoadingTime): This
+    public function setFinishLoadingTime($finishLoadingTime): WebsiteInterface
     {
         $this->finishLoadingTime = $finishLoadingTime;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function addOtherWebsite(WebsiteInterface $website): WebsiteInterface
+    {
+        $this->otherWebsites[] = $website;
 
         return $this;
     }
