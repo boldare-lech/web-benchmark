@@ -29,12 +29,14 @@ class WebsiteBenchmarker
 
     protected function checkWebsite(WebsiteInterface $website): void
     {
-        try {
-            $website->setStartLoadingTime(microtime(true));
-            $this->curl->connect($website->getUrl());
-            $website->setFinishLoadingTime(microtime(true));
-        } catch(Throwable $e) {
-            $website->setException($e);
+        if ($website->isValid()) {
+            try {
+                $website->setStartLoadingTime(microtime(true));
+                $this->curl->connect($website->getUrl());
+                $website->setFinishLoadingTime(microtime(true));
+            } catch (Throwable $e) {
+                $website->setException($e);
+            }
         }
     }
 

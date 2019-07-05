@@ -3,7 +3,7 @@
 
 namespace App\Entity;
 
-use \ArrayAccess;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use \Throwable;
 use \DateTime;
 
@@ -31,15 +31,15 @@ interface WebsiteInterface
     public function setUrl(string $url): WebsiteInterface;
 
     /**
-     * @return ArrayAccess
+     * @return AbstractCollection
      */
-    public function getOtherWebsites(): ArrayAccess;
+    public function getOtherWebsites(): AbstractCollection;
 
     /**
-     * @param ArrayAccess $otherUrls
+     * @param AbstractCollection $otherUrls
      * @return WebsiteInterface
      */
-    public function setOtherWebsites(ArrayAccess $otherUrls): WebsiteInterface;
+    public function setOtherWebsites(AbstractCollection $otherUrls): WebsiteInterface;
 
     /**
      * @return float|float
@@ -100,4 +100,20 @@ interface WebsiteInterface
      * @return string
      */
     public function diffLoadTime(WebsiteInterface $website): ?string;
+
+    /**
+     * @return array
+     */
+    public function getViolations(): ?ConstraintViolationListInterface;
+
+    /**
+     * @param array $violations
+     * @return WebsiteInterface
+     */
+    public function setViolations(ConstraintViolationListInterface $violations):  WebsiteInterface;
+
+    /**
+     * @return bool
+     */
+    public function isValid(): bool;
 }

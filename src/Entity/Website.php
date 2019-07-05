@@ -5,6 +5,7 @@ namespace App\Entity;
 use \ArrayAccess;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use \Throwable;
 use \DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,12 +19,20 @@ class Website implements WebsiteInterface
     /**
      * @var string
      *
-     * @Assert\Url
+     * @Assert\Url()
      */
     protected $url;
 
     /**
      * @var WebsitesCollection
+     *
+     * @Assert\Count(
+     *      min = 1,
+     *      max = 5,
+     *      minMessage = "You must specify at least one webiste to compare",
+     *      maxMessage = "You cannot specify more than {{ limit }} websites to compare",
+     * )
+     * @Assert\Valid(groups="main")
      */
     protected $otherWebsites;
 
@@ -41,6 +50,11 @@ class Website implements WebsiteInterface
      * @var Throwable
      */
     protected $exception;
+
+    /**
+     * @var ConstraintViolationListInterface
+     */
+    protected $violations;
 
     /**
      * @var DateTime
@@ -74,7 +88,7 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function getOtherWebsites(): ArrayAccess
+    public function getOtherWebsites(): AbstractCollection
     {
         return $this->otherWebsites;
     }
@@ -83,9 +97,9 @@ class Website implements WebsiteInterface
      * @param WebsitesCollection $otherUrls Websites Collection
      *
      *
-     * @return This
+     * @return WebsiteInterface
      */
-    public function setOtherWebsites(\ArrayAccess $otherUrls): WebsiteInterface
+    public function setOtherWebsites(AbstractCollection $otherUrls): WebsiteInterface
     {
         $this->otherWebsites = $otherUrls;
 
@@ -167,6 +181,26 @@ class Website implements WebsiteInterface
     /**
      * @return array
      */
+    public function getViolations(): ?ConstraintViolationListInterface
+    {
+        return $this->violations;
+    }
+
+    /**
+     * @param ConstraintViolationListInterface $violations
+     */
+    public function setViolations(ConstraintViolationListInterface $violations):  WebsiteInterface
+    {
+        $this->violations = $violations;
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return array
+     */
     public function getWebsitesArray(): array
     {
         assert($this->getOtherWebsites() instanceof WebsitesCollection);
@@ -210,6 +244,13 @@ class Website implements WebsiteInterface
         return $this->countLoadTime() - $website->countLoadTime();
     }
 
+    public function isValid(): bool
+    {
+        if ($this->getException() || $this->getViolations()) {
+            return false;
+        }
+        return true;
+    }
     /**
      * @param Table $table
      */

@@ -4,7 +4,7 @@
 namespace App\Entity;
 
 
-abstract class AbstractCollection implements \ArrayAccess, \Iterator
+abstract class AbstractCollection implements \ArrayAccess, \Iterator, \Countable
 {
     protected $container = [];
 
@@ -96,5 +96,13 @@ abstract class AbstractCollection implements \ArrayAccess, \Iterator
         }
 
         return $array;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->container);
     }
 }
