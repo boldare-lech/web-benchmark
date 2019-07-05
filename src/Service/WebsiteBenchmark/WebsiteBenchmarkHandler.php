@@ -13,12 +13,10 @@ class WebsiteBenchmarkHandler
 
     public function __construct(
         WebsiteCreator $creator,
-        WebsiteBenchmarker $benchmarker,
-        BaseReport $report
+        WebsiteBenchmarker $benchmarker
     ) {
         $this->creator = $creator;
         $this->benchmarker = $benchmarker;
-        $this->report = $report;
     }
 
     public function handle(array $arguments)

@@ -7,6 +7,7 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use \Throwable;
 use \DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -16,6 +17,8 @@ class Website implements WebsiteInterface
 {
     /**
      * @var string
+     *
+     * @Assert\Url
      */
     protected $url;
 
