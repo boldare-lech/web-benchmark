@@ -16,12 +16,15 @@ class WebsiteBenchmarker
         $this->curl = $curl;
     }
 
-    public function benchmark(WebsiteInterface $website)
+    public function benchmark(WebsiteInterface $website): WebsiteInterface
     {
+        $this->checkWebsite($website);
 
-        foreach ($website->getOtherWebsites() as $website) {
-            $this->checkWebsite($website);
+        foreach ($website->getOtherWebsites() as $otherWebsite) {
+            $this->checkWebsite($otherWebsite);
         }
+
+        return $website;
     }
 
     protected function checkWebsite(WebsiteInterface $website): void

@@ -42,9 +42,9 @@ interface WebsiteInterface
     public function setOtherWebsites(ArrayAccess $otherUrls): WebsiteInterface;
 
     /**
-     * @return float
+     * @return float|float
      */
-    public function getStartLoadingTime(): float;
+    public function getStartLoadingTime(): ?float;
 
     /**
      * @param float $startLoadingTime
@@ -54,9 +54,9 @@ interface WebsiteInterface
     public function setStartLoadingTime(float $startLoadingTime): WebsiteInterface;
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getFinishLoadingTime(): float;
+    public function getFinishLoadingTime(): ?float;
 
     /**
      * @param float $finishLoadingTime
@@ -78,7 +78,7 @@ interface WebsiteInterface
     /**
      * @return \Throwable
      */
-    public function getException(): Throwable;
+    public function getException(): ?Throwable;
 
     /**
      * @return DateTime
@@ -88,5 +88,16 @@ interface WebsiteInterface
     /**
      * @return float
      */
-    public function countLoadingTime(): float;
+    public function countLoadTime(): ?float;
+
+    /**
+     * @return string
+     */
+    public function getLoadTime(): string;
+
+    /**
+     * @param WebsiteInterface $website
+     * @return string
+     */
+    public function diffLodatTime(WebsiteInterface $website): string;
 }

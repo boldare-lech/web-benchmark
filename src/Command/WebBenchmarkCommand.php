@@ -10,7 +10,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Throwable;
+use Symfony\Component\Console\Helper\Table;
 
 
 /**
@@ -74,7 +74,33 @@ class WebBenchmarkCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->handler->handle($input->getArguments());
+        $website = $this->handler->handle($input->getArguments());
+
+        assert($website instanceof WebsiteInterface);
+
+        $table = new Table($output);
+
+        $table->setHeaderTitle(
+            $website->getUrl() . ' load time: ' . $website->getLoadTime()
+        );
+
+        $table->setHeaders(
+            ['url', 'load time', 'difference']
+        );
+
+        $rows = [];
+        foreach ($website->getOtherWebsites() as $otherWebsite) {
+            assert($otherWebsite instanceof WebsiteInterface);
+            $rows[] = [
+                $otherWebsite->getUrl(),
+                $otherWebsite->getLoadTime(),
+                $otherWebsite->diffLodatTime($website)
+            ];
+        }
+
+        $table->setRows($rows);
+
+        $table->render();
     }
 
 }

@@ -3,13 +3,13 @@
 
 namespace App\Service\Reports;
 
-use App\Entity\Website;
 use App\Entity\WebsiteInterface;
+use Symfony\Component\Console\Helper\Table;
 
 class BaseReport
 {
-    public function create(WebsiteInterface $website)
+    public function createConsoleTable(WebsiteInterface $website): Table
     {
-//        var_dump($website->getOtherWebsites()[0]);
+
     }
 }

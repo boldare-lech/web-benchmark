@@ -91,7 +91,7 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function getStartLoadingTime(): float
+    public function getStartLoadingTime(): ?float
     {
         return $this->startLoadingTime;
     }
@@ -109,7 +109,7 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function getFinishLoadingTime(): float
+    public function getFinishLoadingTime(): ?float
     {
         return $this->finishLoadingTime;
     }
@@ -147,7 +147,7 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function getException(): Throwable
+    public function getException(): ?Throwable
     {
         return $this->exception;
     }
@@ -175,8 +175,29 @@ class Website implements WebsiteInterface
     /**
      * @return float
      */
-    public function countLoadingTime(): float
+    public function countLoadTime(): ?float
     {
         return $this->getFinishLoadingTime() - $this->getStartLoadingTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getLoadTime(): string
+    {
+        if ($this->getException()) {
+            return $this->getException()->getMessage();
+        }
+
+        return $this->countLoadTime();
+    }
+
+    public function diffLodatTime(WebsiteInterface $website): string
+    {
+        if ($this->getException() || $website->getException()) {
+            return ' - ';
+        }
+
+        return $this->countLoadTime() - $website->countLoadTime();
     }
 }

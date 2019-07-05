@@ -25,9 +25,6 @@ class WebsiteBenchmarkHandler
     {
         $website = $this->creator->create($arguments);
 
-        $this->benchmarker->benchmark($website);
-
-        $baseReport = $this->report->create($website);
-
+        return $this->benchmarker->benchmark($website);
     }
 }
