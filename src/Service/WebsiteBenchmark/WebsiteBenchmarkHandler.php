@@ -3,17 +3,22 @@
 
 namespace App\Service\WebsiteBenchmark;
 
+use App\Service\Reports\BaseReport;
+
 class WebsiteBenchmarkHandler
 {
     protected $creator;
     protected $benchmarker;
+    protected $report;
 
     public function __construct(
         WebsiteCreator $creator,
-        WebsiteBenchmarker $benchmarker
+        WebsiteBenchmarker $benchmarker,
+        BaseReport $report
     ) {
         $this->creator = $creator;
         $this->benchmarker = $benchmarker;
+        $this->report = $report;
     }
 
     public function handle(array $arguments)
@@ -22,7 +27,7 @@ class WebsiteBenchmarkHandler
 
         $this->benchmarker->benchmark($website);
 
-        var_dump($website);die;
+        $baseReport = $this->report->create($website);
 
     }
 }

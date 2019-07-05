@@ -5,6 +5,7 @@ namespace App\Entity;
 use phpDocumentor\Reflection\Types\This;
 use \ArrayAccess;
 use \Throwable;
+use \DateTime;
 
 
 /**
@@ -37,9 +38,15 @@ class Website implements WebsiteInterface
      */
     protected $exception;
 
+    /**
+     * @var DateTime
+     */
+    protected $date;
+
     public function __construct(string $url)
     {
         $this->url = $url;
+        $this->date = new DateTime();
         $this->otherWebsites = new WebsitesCollection();
     }
 
@@ -143,5 +150,25 @@ class Website implements WebsiteInterface
     public function getException(): Throwable
     {
         return $this->exception;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDate(): DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWebsitesArray(): array
+    {
+        assert($this->getOtherWebsites() instanceof WebsitesCollection);
+        $array = $this->getOtherWebsites()->asArray();
+        array_unshift($array, $this);
+
+        return $array;
     }
 }

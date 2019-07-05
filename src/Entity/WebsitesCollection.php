@@ -33,29 +33,46 @@ class WebsitesCollection implements \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset)
+    {
         return isset($this->container[$offset]);
     }
 
     /**
      * @inheritDoc
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         unset($this->container[$offset]);
     }
 
     /**
      * @inheritDoc
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
 
     /**
      * @inheritDoc
      */
-    public function getWebsites() {
+    public function getWebsites()
+    {
         return $this->container;
+    }
+
+    /**
+     * @return array
+     */
+    public function asArray()
+    {
+        $array = [];
+        foreach ($this->container as $item) {
+            $array[] = $item;
+        }
+
+        return $array;
     }
 
 

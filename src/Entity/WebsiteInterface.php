@@ -3,9 +3,9 @@
 
 namespace App\Entity;
 
-
-use phpDocumentor\Reflection\Types\This;
 use \ArrayAccess;
+use \Throwable;
+use \DateTime;
 
 /**
  * Interface WebsiteInterface
@@ -73,10 +73,15 @@ interface WebsiteInterface
      * @param \Throwable $exception
      * @return WebsiteInterface
      */
-    public function setException(\Throwable $exception): WebsiteInterface;
+    public function setException(Throwable $exception): WebsiteInterface;
 
     /**
      * @return \Throwable
      */
-    public function getException(): \Throwable;
+    public function getException(): Throwable;
+
+    /**
+     * @return DateTime
+     */
+    public function getDate(): DateTime;
 }
