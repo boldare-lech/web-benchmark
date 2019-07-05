@@ -18,7 +18,6 @@ class WebsiteBenchmarker
 
     public function benchmark(WebsiteInterface $website)
     {
-        $this->checkWebsite($website);
 
         foreach ($website->getOtherWebsites() as $website) {
             $this->checkWebsite($website);

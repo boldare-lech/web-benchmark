@@ -171,4 +171,12 @@ class Website implements WebsiteInterface
 
         return $array;
     }
+
+    /**
+     * @return float
+     */
+    public function countLoadingTime(): float
+    {
+        return $this->getFinishLoadingTime() - $this->getStartLoadingTime();
+    }
 }

@@ -10,6 +10,6 @@ class BaseReport
 {
     public function create(WebsiteInterface $website)
     {
-        die('ok_');
+//        var_dump($website->getOtherWebsites()[0]);
     }
 }

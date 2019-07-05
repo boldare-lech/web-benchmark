@@ -84,4 +84,9 @@ interface WebsiteInterface
      * @return DateTime
      */
     public function getDate(): DateTime;
+
+    /**
+     * @return float
+     */
+    public function countLoadingTime(): float;
 }
