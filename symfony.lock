@@ -418,9 +418,6 @@
             "config/packages/test/swiftmailer.yaml"
         ]
     },
-    "symfony/templating": {
-        "version": "5.0-dev"
-    },
     "symfony/test-pack": {
         "version": "dev-master"
     },

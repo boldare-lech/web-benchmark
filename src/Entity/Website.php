@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use phpDocumentor\Reflection\Types\This;
 use \ArrayAccess;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableSeparator;
 use \Throwable;
 use \DateTime;
 
@@ -192,12 +193,47 @@ class Website implements WebsiteInterface
         return $this->countLoadTime();
     }
 
-    public function diffLodatTime(WebsiteInterface $website): string
+    /**
+     * @param WebsiteInterface $website
+     *
+     * @return string|null
+     */
+    public function diffLoadTime(WebsiteInterface $website): ?string
     {
         if ($this->getException() || $website->getException()) {
-            return ' - ';
+            return null;
         }
 
         return $this->countLoadTime() - $website->countLoadTime();
+    }
+
+    /**
+     * @param Table $table
+     */
+    public function generateConsoleTable(Table $table): void
+    {
+        $table->setHeaderTitle(
+            $this->getDate()->format('Y-m-d')  .
+            ' ' .
+            $this->getUrl() .
+            ' load time: ' .
+            $this->getLoadTime()
+        );
+
+        $table->setHeaders(
+            ['url', 'load time', 'difference']
+        );
+
+        $rows = [];
+        foreach ($this->getOtherWebsites() as $otherWebsite) {
+            assert($otherWebsite instanceof WebsiteInterface);
+            $rows[] = new TableSeparator();
+            $rows[] = [
+                $otherWebsite->getUrl(),
+                $otherWebsite->getLoadTime(),
+                $otherWebsite->diffLoadTime($this)
+            ];
+        }
+        $table->setRows($rows);
     }
 }

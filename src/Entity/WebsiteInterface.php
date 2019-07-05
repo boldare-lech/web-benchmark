@@ -99,5 +99,5 @@ interface WebsiteInterface
      * @param WebsiteInterface $website
      * @return string
      */
-    public function diffLodatTime(WebsiteInterface $website): string;
+    public function diffLoadTime(WebsiteInterface $website): ?string;
 }
