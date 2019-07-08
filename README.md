@@ -1,5 +1,10 @@
 # web-benchmark
 
+##About
+Simple project for website benchmarking
+
+Symfony 4.4.0-DEV used, just to check it out :-)
+
 ## Installation
 
 Clone the repository, enter the main folder and run:
