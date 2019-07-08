@@ -4,16 +4,23 @@
 namespace App\Service\WebsiteBenchmark;
 
 use App\Entity\WebsiteInterface;
+use App\Event\BenchmarkCreatedEvent;
 use App\Service\CurlConnectInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
 class WebsiteBenchmarker
 {
     protected $curl;
 
-    public function __construct(CurlConnectInterface $curl)
-    {
+    protected $eventDispatcher;
+
+    public function __construct(
+        CurlConnectInterface $curl,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->curl = $curl;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function benchmark(WebsiteInterface $website): WebsiteInterface
@@ -23,6 +30,9 @@ class WebsiteBenchmarker
         foreach ($website->getOtherWebsites() as $otherWebsite) {
             $this->checkWebsite($otherWebsite);
         }
+
+        $event = new BenchmarkCreatedEvent($website);
+        $this->eventDispatcher->dispatch($event, BenchmarkCreatedEvent::NAME);
 
         return $website;
     }
