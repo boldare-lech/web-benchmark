@@ -101,19 +101,14 @@ interface WebsiteInterface
      */
     public function diffLoadTime(WebsiteInterface $website): ?string;
 
-    /**
-     * @return array
-     */
-    public function getViolations(): ?ConstraintViolationListInterface;
-
-    /**
-     * @param array $violations
-     * @return WebsiteInterface
-     */
-    public function setViolations(ConstraintViolationListInterface $violations):  WebsiteInterface;
 
     /**
      * @return bool
      */
     public function isValid(): bool;
+
+    /**
+     * @return string
+     */
+    public function getErrors(): string;
 }

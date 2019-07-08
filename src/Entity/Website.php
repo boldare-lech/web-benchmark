@@ -2,10 +2,6 @@
 
 namespace App\Entity;
 
-use \ArrayAccess;
-use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Helper\TableSeparator;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use \Throwable;
 use \DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,8 +27,8 @@ class Website implements WebsiteInterface
      *      max = 5,
      *      minMessage = "You must specify at least one webiste to compare",
      *      maxMessage = "You cannot specify more than {{ limit }} websites to compare",
+     *      groups={"main"}
      * )
-     * @Assert\Valid(groups="main")
      */
     protected $otherWebsites;
 
@@ -50,11 +46,6 @@ class Website implements WebsiteInterface
      * @var Throwable
      */
     protected $exception;
-
-    /**
-     * @var ConstraintViolationListInterface
-     */
-    protected $violations;
 
     /**
      * @var DateTime
@@ -178,27 +169,9 @@ class Website implements WebsiteInterface
         return $this->date;
     }
 
-    /**
-     * @return array
-     */
-    public function getViolations(): ?ConstraintViolationListInterface
-    {
-        return $this->violations;
-    }
-
-    /**
-     * @param ConstraintViolationListInterface $violations
-     */
-    public function setViolations(ConstraintViolationListInterface $violations):  WebsiteInterface
-    {
-        $this->violations = $violations;
-
-        return $this;
-    }
 
 
-
-    /**
+    /*
      * @return array
      */
     public function getWebsitesArray(): array
@@ -223,11 +196,11 @@ class Website implements WebsiteInterface
      */
     public function getLoadTime(): string
     {
-        if ($this->getException()) {
-            return $this->getException()->getMessage();
+        if ($this->isValid()) {
+            return round($this->countLoadTime(), 4);
         }
 
-        return $this->countLoadTime();
+        return '';
     }
 
     /**
@@ -241,43 +214,29 @@ class Website implements WebsiteInterface
             return null;
         }
 
-        return $this->countLoadTime() - $website->countLoadTime();
+        return round($this->countLoadTime() - $website->countLoadTime(), 4);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isValid(): bool
     {
-        if ($this->getException() || $this->getViolations()) {
+        if ($this->getException()) {
             return false;
         }
+
         return true;
     }
+
     /**
-     * @param Table $table
+     * @inheritDoc
      */
-    public function generateConsoleTable(Table $table): void
+    public function getErrors(): string
     {
-        $table->setHeaderTitle(
-            $this->getDate()->format('Y-m-d')  .
-            ' ' .
-            $this->getUrl() .
-            ' load time: ' .
-            $this->getLoadTime()
-        );
-
-        $table->setHeaders(
-            ['url', 'load time', 'difference']
-        );
-
-        $rows = [];
-        foreach ($this->getOtherWebsites() as $otherWebsite) {
-            assert($otherWebsite instanceof WebsiteInterface);
-            $rows[] = new TableSeparator();
-            $rows[] = [
-                $otherWebsite->getUrl(),
-                $otherWebsite->getLoadTime(),
-                $otherWebsite->diffLoadTime($this)
-            ];
+        if ($this->getException()) {
+            return $this->getException()->getMessage();
         }
-        $table->setRows($rows);
+        return '';
     }
 }

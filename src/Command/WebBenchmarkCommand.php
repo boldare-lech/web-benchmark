@@ -7,6 +7,7 @@ use App\Entity\Website;
 use App\Entity\WebsiteInterface;
 
 use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;
+use App\Service\WebsiteBenchmark\WebsiteReport;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,10 +25,14 @@ class WebBenchmarkCommand extends Command
 {
     protected $handler;
 
+    protected $websiteReport;
+
     public function __construct(
-        WebsiteBenchmarkHandler $handler
+        WebsiteBenchmarkHandler $handler,
+        WebsiteReport $websiteReport
     ) {
         $this->handler = $handler;
+        $this->websiteReport = $websiteReport;
 
         parent::__construct();
     }
@@ -81,7 +86,7 @@ class WebBenchmarkCommand extends Command
         assert($website instanceof Website);
 
         $table = new Table($output);
-        $website->generateConsoleTable($table);
+        $this->websiteReport->generateConsoleTable($website, $table);
 
         $table->render();
     }

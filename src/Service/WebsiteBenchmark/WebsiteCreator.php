@@ -23,7 +23,6 @@ class WebsiteCreator
 
     public function create(array $arguments): WebsiteInterface
     {
-        $validationGroups = ['all'];
         $urls = $this->makeUrlsArray($arguments);
 
         foreach ($urls as $url) {
@@ -38,21 +37,9 @@ class WebsiteCreator
             }
         }
 
-        $this->validate();
-
         return $this->website;
     }
 
-    protected function validate($groups = [])
-    {
-        $violations = $this->validator->validate($this->website);
-
-        var_dump($violations->count());die;
-
-        if ($violations->count()) {
-            $this->website->setViolations($violations);
-        }
-    }
 
     protected function makeUrlsArray(array $arguments): array
     {
