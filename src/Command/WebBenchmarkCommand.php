@@ -22,10 +22,22 @@ use Symfony\Component\Console\Helper\Table;
  */
 class WebBenchmarkCommand extends Command
 {
+    /**
+     * @var WebsiteBenchmarkHandler
+     */
     protected $handler;
 
+    /**
+     * @var WebsiteReportInterface
+     */
     protected $websiteReport;
 
+    /**
+     * WebBenchmarkCommand constructor.
+     *
+     * @param WebsiteBenchmarkHandler $handler
+     * @param WebsiteReportInterface $websiteReport
+     */
     public function __construct(
         WebsiteBenchmarkHandler $handler,
         WebsiteReportInterface $websiteReport
