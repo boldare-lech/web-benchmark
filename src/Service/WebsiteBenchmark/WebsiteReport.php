@@ -8,7 +8,7 @@ use App\Entity\WebsiteInterface;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 
-class WebsiteReport
+class WebsiteReport implements WebsiteReportInterface
 {
     /**
      * @param WebsiteInterface $website
@@ -46,5 +46,10 @@ class WebsiteReport
             ];
         }
         $table->setRows($rows);
+    }
+
+    public function saveToLog(WebsiteInterface $website)
+    {
+        //@TODO saving report to log
     }
 }

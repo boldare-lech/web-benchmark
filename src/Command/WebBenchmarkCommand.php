@@ -6,10 +6,9 @@ namespace App\Command;
 use App\Entity\Website;
 use App\Entity\WebsiteInterface;
 
-use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;
-use App\Service\WebsiteBenchmark\WebsiteReport;
+use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;;
+use App\Service\WebsiteBenchmark\WebsiteReportInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -29,7 +28,7 @@ class WebBenchmarkCommand extends Command
 
     public function __construct(
         WebsiteBenchmarkHandler $handler,
-        WebsiteReport $websiteReport
+        WebsiteReportInterface $websiteReport
     ) {
         $this->handler = $handler;
         $this->websiteReport = $websiteReport;
@@ -87,6 +86,7 @@ class WebBenchmarkCommand extends Command
 
         $table = new Table($output);
         $this->websiteReport->generateConsoleTable($website, $table);
+        $this->websiteReport->saveToLog($website);
 
         $table->render();
     }

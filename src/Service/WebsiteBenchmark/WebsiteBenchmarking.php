@@ -9,12 +9,27 @@ use App\Service\CurlConnectInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
-class WebsiteBenchmarker
+/**
+ * Class WebsiteBenchmarking
+ * @package App\Service\WebsiteBenchmark
+ */
+class WebsiteBenchmarking implements WebsiteBenchmarkingInterface
 {
+    /**
+     * @var CurlConnectInterface
+     */
     protected $curl;
 
+    /**
+     * @var EventDispatcherInterface
+     */
     protected $eventDispatcher;
 
+    /**
+     * WebsiteBenchmarking constructor.
+     * @param CurlConnectInterface $curl
+     * @param EventDispatcherInterface $eventDispatcher
+     */
     public function __construct(
         CurlConnectInterface $curl,
         EventDispatcherInterface $eventDispatcher
@@ -23,6 +38,10 @@ class WebsiteBenchmarker
         $this->eventDispatcher = $eventDispatcher;
     }
 
+    /**
+     * @param WebsiteInterface $website
+     * @return WebsiteInterface
+     */
     public function benchmark(WebsiteInterface $website): WebsiteInterface
     {
         $this->checkWebsite($website);
@@ -37,6 +56,9 @@ class WebsiteBenchmarker
         return $website;
     }
 
+    /**
+     * @param WebsiteInterface $website
+     */
     protected function checkWebsite(WebsiteInterface $website): void
     {
         if ($website->isValid()) {
