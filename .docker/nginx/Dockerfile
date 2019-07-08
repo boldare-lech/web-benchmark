@@ -3,7 +3,7 @@ FROM alpine:3.8
 RUN apk add --update --no-cache nginx
 
 COPY nginx.conf /etc/nginx/
-COPY symfony.conf /etc/nginx/conf.d/
+COPY symfony.conf /etc/nginx/conf.d/default.conf
 
 RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
 
