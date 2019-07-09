@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db9613c416ee61fd1d7195f7c8b9a9f1",
+    "content-hash": "4225790dfe17aa48dde9272cf6cd5c25",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6276,12 +6276,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "f520183a3c99396d2ef75f9abda4c12b19cd375d"
+                "reference": "bbccbc7ee97d6cba0aa89969c82f36b8ac139f56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/f520183a3c99396d2ef75f9abda4c12b19cd375d",
-                "reference": "f520183a3c99396d2ef75f9abda4c12b19cd375d",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/bbccbc7ee97d6cba0aa89969c82f36b8ac139f56",
+                "reference": "bbccbc7ee97d6cba0aa89969c82f36b8ac139f56",
                 "shasum": ""
             },
             "require": {
@@ -6333,7 +6333,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2019-06-27T16:53:23+00:00"
+            "time": "2019-07-05T06:37:37+00:00"
         },
         {
             "name": "symfony/profiler-pack",
@@ -6595,7 +6595,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "sensio/framework-extra-bundle": 20
+        "sensio/framework-extra-bundle": 20,
+        "symfony/phpunit-bridge": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
