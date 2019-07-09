@@ -10,10 +10,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
 /**
- * Class BenchmarkSmsSubscriber
+ * Class BenchmarkLogSubscriber
  * @package App\EventSubscriber
  */
-class BenchmarkSmsSubscriber implements EventSubscriberInterface
+class BenchmarkLogSubscriber implements EventSubscriberInterface
 {
     /**
      * @return array

@@ -1,6 +1,7 @@
 # web-benchmark
-Not everything from 'RECRUITMENT TASK' is DONE  
-
+Not everything from 'RECRUITMENT TASK' is DONE due priorities. 
+There was a lot of work in commercial projects.  
+But it should ne enough to show abilities.
 
 ##About
 Simple project for website benchmarking.
