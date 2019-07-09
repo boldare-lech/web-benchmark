@@ -7,22 +7,30 @@ namespace App\Tests;
 use App\Entity\Website;
 use App\Entity\WebsiteInterface;
 use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;
-use App\Service\WebsiteBenchmark\WebsiteReport;
-use App\Service\WebsiteBenchmark\WebsiteReportInterface;
-use Symfony\Component\Console\Helper\Table;
+use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandlerInterface;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class BenchmarkTestCase
+ * @package App\Tests
+ */
 abstract class BenchmarkTestCase extends TestCase
 {
 
+    /**
+     *
+     */
     const WEBSITES = [
         'https://www.google.pl/',
         'https://www.wp.pl/',
         'https://www.onet.pl/'
     ];
 
+    /**
+     *
+     */
     const COMMAND_ARGUMENTS = [
            WebsiteInterface::WEBSITE_FIELD => self::WEBSITES[0],
            WebsiteInterface::OTHER_WEBSITES_FIELD =>
@@ -31,14 +39,10 @@ abstract class BenchmarkTestCase extends TestCase
                self::WEBSITES[2]
     ];
 
-    protected function mockConsoleTable(): MockObject
-    {
-        return $this
-            ->getMockBuilder(Table::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
 
+    /**
+     * @return MockObject|WebsiteBenchmarkHandlerInterface
+     */
     protected function mockWebsiteBenchmarkHandler(): MockObject
     {
         return $this
@@ -47,6 +51,9 @@ abstract class BenchmarkTestCase extends TestCase
             ->getMock();
     }
 
+    /**
+     * @return MockObject
+     */
     protected function mockWebsiteReport(): MockObject
     {
         return $this
@@ -56,11 +63,17 @@ abstract class BenchmarkTestCase extends TestCase
 
     }
 
+    /**
+     * @return WebsiteReportInterface
+     */
     protected function createWebsiteReport(): WebsiteReportInterface
     {
         return new WebsiteReport();
     }
 
+    /**
+     * @return MockObject
+     */
     protected function mockWebsite(): MockObject
     {
         return $this
@@ -69,6 +82,9 @@ abstract class BenchmarkTestCase extends TestCase
             ->getMock();
     }
 
+    /**
+     * @return WebsiteInterface
+     */
     protected function createMainWebsite(): WebsiteInterface
     {
         $website = $this->createSingleWebsiste(self::WEBSITES[0]);
@@ -83,6 +99,10 @@ abstract class BenchmarkTestCase extends TestCase
         return $website;
     }
 
+    /**
+     * @param $url
+     * @return WebsiteInterface
+     */
     private function createSingleWebsiste($url): WebsiteInterface
     {
         $website = new Website($url);

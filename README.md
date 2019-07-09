@@ -1,7 +1,9 @@
 # web-benchmark
+Not everything from 'RECRUITMENT TASK' is DONE  
+
 
 ##About
-Simple project for website benchmarking
+Simple project for website benchmarking.
 
 Symfony 4.4.0-DEV used, just to check it out :-)
 
