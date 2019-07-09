@@ -29,7 +29,7 @@ class WebBenchmarkCommandTest extends BenchmarkTestCase
     private $website;
 
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $application = new Application();
         $webBenchmarkCommand = new WebBenchmarkCommand(

@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Website implements WebsiteInterface
 {
+    //@TODO validation by asserts
+
     /**
      * @var string
      *
@@ -204,9 +206,7 @@ class Website implements WebsiteInterface
     }
 
     /**
-     * @param WebsiteInterface $website
-     *
-     * @return string|null
+     * @inheritDoc
      */
     public function diffLoadTime(WebsiteInterface $website): ?string
     {
