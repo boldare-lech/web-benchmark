@@ -1,7 +1,9 @@
 # web-benchmark
-Not everything from 'RECRUITMENT TASK' is DONE due priorities. 
+Not everything from 'RECRUITMENT TASK' is DONE due priorities,
+so some "TODO's" are left. 
 There was a lot of work in commercial projects.  
 But it should be enough to show abilities.
+
 
 ##About
 Simple project for website benchmarking.
