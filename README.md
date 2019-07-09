@@ -1,7 +1,7 @@
 # web-benchmark
 Not everything from 'RECRUITMENT TASK' is DONE due priorities. 
 There was a lot of work in commercial projects.  
-But it should ne enough to show abilities.
+But it should be enough to show abilities.
 
 ##About
 Simple project for website benchmarking.
@@ -30,7 +30,7 @@ docker-compose exec php composer install && exit
 ## Usage
 To create benchmark execute command "app:web-benchmark test.pl"
 ```
-docker-compose exec php bin/console app:web-benchmark {url1} {url2,url3}
+docker-compose exec php php bin/console app:web-benchmark {url1} {url2,url3}
 ```
 
 ## Tests
