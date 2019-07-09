@@ -16,7 +16,7 @@ cp .env.dist .env
 
 Than run:
 ```
-docker-compose up
+docker-compose up -d
 ```
 When containers are up and running, execute:
 
@@ -29,3 +29,8 @@ To create benchmark execute command "app:web-benchmark test.pl"
 ```
 docker-compose exec php bin/console app:web-benchmark {url1} {url2,url3}
 ```
+
+## Tests
+```
+docker-compose exec php php bin/phpunit
+``` 

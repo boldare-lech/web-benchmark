@@ -9,6 +9,7 @@ use App\Entity\WebsiteInterface;
 use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;;
 use App\Service\WebsiteBenchmark\WebsiteReportInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,10 +28,6 @@ class WebBenchmarkCommand extends Command
      */
     protected $handler;
 
-    /**
-     * @var WebsiteReportInterface
-     */
-    protected $websiteReport;
 
     /**
      * WebBenchmarkCommand constructor.
@@ -39,11 +36,9 @@ class WebBenchmarkCommand extends Command
      * @param WebsiteReportInterface $websiteReport
      */
     public function __construct(
-        WebsiteBenchmarkHandler $handler,
-        WebsiteReportInterface $websiteReport
+        WebsiteBenchmarkHandler $handler
     ) {
         $this->handler = $handler;
-        $this->websiteReport = $websiteReport;
 
         parent::__construct();
     }
@@ -94,13 +89,50 @@ class WebBenchmarkCommand extends Command
     {
         $website = $this->handler->handle($input->getArguments());
 
-        assert($website instanceof Website);
+        assert($website instanceof WebsiteInterface);
 
         $table = new Table($output);
-        $this->websiteReport->generateConsoleTable($website, $table);
-        $this->websiteReport->saveToLog($website);
+        $this->generateConsoleTable($website, $table);
 
         $table->render();
+    }
+
+    /**
+     * @param WebsiteInterface $website
+     * @param Table $table
+     *
+     * @return void
+     */
+    private function generateConsoleTable(
+        WebsiteInterface $website, Table $table
+    ): void {
+        $table->setHeaderTitle(
+            $website->getDate()->format('Y-m-d')  .
+            ' ' .
+            $website->getUrl()
+        );
+
+        $table->setHeaders(
+            ['url', 'load time', 'difference', 'errors']
+        );
+
+        $rows = [[
+            $website->getUrl(),
+            $website->getLoadTime(),
+            '',
+            $website->getErrors(),
+        ]];
+        foreach ($website->getOtherWebsites() as $otherWebsite) {
+            assert($otherWebsite instanceof WebsiteInterface);
+            $rows[] = new TableSeparator();
+            $rows[] = [
+                $otherWebsite->getUrl(),
+                $otherWebsite->getLoadTime(),
+                $otherWebsite->diffLoadTime($website),
+                $otherWebsite->getErrors(),
+            ];
+        }
+        $table->setRows($rows);
     }
 
 }
