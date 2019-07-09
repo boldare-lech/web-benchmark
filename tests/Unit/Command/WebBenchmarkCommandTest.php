@@ -48,12 +48,7 @@ class WebBenchmarkCommandTest extends BenchmarkTestCase
         $this->websiteBenchmarkHandler
             ->expects($this->once())
             ->method('handle')
-            ->with(
-                array_merge(
-                    self::COMMAND_ARGUMENTS,
-                    ['command' => WebBenchmarkCommand::getDefaultName()]
-                )
-            )
+            ->with(self::getArgumentsArray())
             ->willReturn($this->website);
 
         $this->commandTester->execute(self::COMMAND_ARGUMENTS);

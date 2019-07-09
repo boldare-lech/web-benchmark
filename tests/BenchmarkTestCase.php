@@ -4,6 +4,7 @@
 namespace App\Tests;
 
 
+use App\Command\WebBenchmarkCommand;
 use App\Entity\Website;
 use App\Entity\WebsiteInterface;
 use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;
@@ -19,18 +20,12 @@ use PHPUnit\Framework\TestCase;
 abstract class BenchmarkTestCase extends TestCase
 {
 
-    /**
-     *
-     */
     const WEBSITES = [
         'https://www.google.pl/',
         'https://www.wp.pl/',
         'https://www.onet.pl/'
     ];
 
-    /**
-     *
-     */
     const COMMAND_ARGUMENTS = [
            WebsiteInterface::WEBSITE_FIELD => self::WEBSITES[0],
            WebsiteInterface::OTHER_WEBSITES_FIELD =>
@@ -39,6 +34,16 @@ abstract class BenchmarkTestCase extends TestCase
                self::WEBSITES[2]
     ];
 
+    /**
+     * @return array
+     */
+    static function getArgumentsArray(): array
+    {
+        return array_merge(
+            self::COMMAND_ARGUMENTS,
+            ['command' => WebBenchmarkCommand::getDefaultName()]
+        );
+    }
 
     /**
      * @return MockObject|WebsiteBenchmarkHandlerInterface
@@ -52,32 +57,12 @@ abstract class BenchmarkTestCase extends TestCase
     }
 
     /**
-     * @return MockObject
-     */
-    protected function mockWebsiteReport(): MockObject
-    {
-        return $this
-            ->getMockBuilder(WebsiteReport::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-    }
-
-    /**
-     * @return WebsiteReportInterface
-     */
-    protected function createWebsiteReport(): WebsiteReportInterface
-    {
-        return new WebsiteReport();
-    }
-
-    /**
-     * @return MockObject
+     * @return MockObject|WebsiteInterface
      */
     protected function mockWebsite(): MockObject
     {
         return $this
-            ->getMockBuilder(WebsiteReport::class)
+            ->getMockBuilder(Website::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
