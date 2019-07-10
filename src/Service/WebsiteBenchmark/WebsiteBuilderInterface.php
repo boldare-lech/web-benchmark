@@ -8,13 +8,13 @@ use App\Entity\Website;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Interface WebsiteCreatorInterface
+ * Interface WebsiteBuilderInterface
  * @package App\Service\WebsiteBenchmark
  */
-interface WebsiteCreatorInterface
+interface WebsiteBuilderInterface
 {
     /**
-     * WebsiteCreatorInterface constructor.
+     * WebsiteBuilderInterface constructor.
      * @param ValidatorInterface $validator
      */
     public function __construct(ValidatorInterface $validator);

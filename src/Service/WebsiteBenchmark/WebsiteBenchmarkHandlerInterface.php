@@ -12,11 +12,11 @@ interface WebsiteBenchmarkHandlerInterface
 
     /**
      * WebsiteBenchmarkHandlerInterface constructor.
-     * @param WebsiteCreatorInterface $creator
+     * @param WebsiteBuilderInterface $creator
      * @param WebsiteBenchmarkingInterface $benchmarker
      */
     public function __construct(
-        WebsiteCreatorInterface $creator,
+        WebsiteBuilderInterface $creator,
         WebsiteBenchmarkingInterface $benchmarker
     );
 

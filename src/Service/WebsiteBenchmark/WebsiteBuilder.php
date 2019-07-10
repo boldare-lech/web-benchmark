@@ -8,10 +8,10 @@ use App\Entity\Website;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Class WebsiteCreator
+ * Class WebsiteBuilder
  * @package App\Service\WebsiteBenchmark
  */
-class WebsiteCreator implements WebsiteCreatorInterface
+class WebsiteBuilder implements WebsiteBuilderInterface
 {
     /**
      * @var ValidatorInterface
@@ -24,7 +24,7 @@ class WebsiteCreator implements WebsiteCreatorInterface
     protected $website;
 
     /**
-     * WebsiteCreator constructor.
+     * WebsiteBuilder constructor.
      * @param ValidatorInterface $validator
      */
     public function __construct(ValidatorInterface $validator)

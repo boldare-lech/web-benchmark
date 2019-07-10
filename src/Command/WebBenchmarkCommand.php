@@ -6,6 +6,7 @@ namespace App\Command;
 use App\Entity\Website;
 use App\Entity\WebsiteInterface;
 
+use App\Service\WebsiteBenchmark\BenchmarkConsoleReport;
 use App\Service\WebsiteBenchmark\WebsiteBenchmarkHandler;;
 use App\Service\WebsiteBenchmark\WebsiteReportInterface;
 use Symfony\Component\Console\Command\Command;
@@ -92,47 +93,10 @@ class WebBenchmarkCommand extends Command
         assert($website instanceof WebsiteInterface);
 
         $table = new Table($output);
-        $this->generateConsoleTable($website, $table);
+
+        $reportGenerator = new BenchmarkConsoleReport();
+        $reportGenerator->generateConsoleTable($website, $table);
 
         $table->render();
     }
-
-    /**
-     * @param WebsiteInterface $website
-     * @param Table $table
-     *
-     * @return void
-     */
-    private function generateConsoleTable(
-        WebsiteInterface $website, Table $table
-    ): void {
-        $table->setHeaderTitle(
-            $website->getDate()->format('Y-m-d')  .
-            ' ' .
-            $website->getUrl()
-        );
-
-        $table->setHeaders(
-            ['url', 'load time', 'difference', 'errors']
-        );
-
-        $rows = [[
-            $website->getUrl(),
-            $website->getLoadTime(),
-            '',
-            $website->getErrors(),
-        ]];
-        foreach ($website->getOtherWebsites() as $otherWebsite) {
-            assert($otherWebsite instanceof WebsiteInterface);
-            $rows[] = new TableSeparator();
-            $rows[] = [
-                $otherWebsite->getUrl(),
-                $otherWebsite->getLoadTime(),
-                $otherWebsite->diffLoadTime($website),
-                $otherWebsite->getErrors(),
-            ];
-        }
-        $table->setRows($rows);
-    }
-
 }

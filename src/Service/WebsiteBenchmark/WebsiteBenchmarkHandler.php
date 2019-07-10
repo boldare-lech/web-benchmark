@@ -12,7 +12,7 @@ class WebsiteBenchmarkHandler
     protected $report;
 
     public function __construct(
-        WebsiteCreatorInterface $creator,
+        WebsiteBuilderInterface $creator,
         WebsiteBenchmarkingInterface $benchmarker
     ) {
         $this->creator = $creator;
