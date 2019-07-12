@@ -21,7 +21,7 @@ git clone git@github.com:boldare-lech/web-benchmark.git
 Enter the main folder and run:
 
 ```
-cp docker-compose.yml.dist docker-compose.yaml &&\
+cp docker-compose.yaml.dist docker-compose.yaml &&\
 cp .env.dist .env
 ```
 
