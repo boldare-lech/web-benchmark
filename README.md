@@ -1,6 +1,6 @@
 # web-benchmark
-Not everything from 'RECRUITMENT TASK' is DONE due priorities,
-so some "TODO's" are left.B1 
+Not everything from 'RECRUITMENT TASK' is DONE due priorities and some misunderstanding about time :)
+so some "TODO's" are left. 
 There was a lot of work in commercial projects.  
 But it should be enough to show abilities.
 
@@ -8,7 +8,6 @@ But it should be enough to show abilities.
 ##About
 Simple project for website benchmarking.
 
-Symfony 4.4.0-DEV used, just to check it out :-)
 
 ## Installation
 
@@ -37,5 +36,5 @@ docker-compose exec php php bin/console app:web-benchmark {url1} {url2,url3}
 
 ## Tests
 ```
-docker-compose exec php php bin/phpunit
+docker-compose exec php bin/phpunit
 ``` 

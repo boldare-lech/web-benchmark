@@ -72,13 +72,13 @@ abstract class BenchmarkTestCase extends TestCase
      */
     protected function createMainWebsite(): WebsiteInterface
     {
-        $website = $this->createSingleWebsiste(self::WEBSITES[0]);
+        $website = $this->createSingleWebsite(self::WEBSITES[0]);
 
         $website->addOtherWebsite(
-            $this->createSingleWebsiste(self::WEBSITES[1])
+            $this->createSingleWebsite(self::WEBSITES[1])
         );
         $website->addOtherWebsite(
-            $this->createSingleWebsiste(self::WEBSITES[0])
+            $this->createSingleWebsite(self::WEBSITES[0])
         );
 
         return $website;
@@ -88,7 +88,7 @@ abstract class BenchmarkTestCase extends TestCase
      * @param $url
      * @return WebsiteInterface
      */
-    private function createSingleWebsiste($url): WebsiteInterface
+    private function createSingleWebsite($url): WebsiteInterface
     {
         $website = new Website($url);
 

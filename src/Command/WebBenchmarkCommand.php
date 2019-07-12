@@ -34,7 +34,6 @@ class WebBenchmarkCommand extends Command
      * WebBenchmarkCommand constructor.
      *
      * @param WebsiteBenchmarkHandler $handler
-     * @param WebsiteReportInterface $websiteReport
      */
     public function __construct(
         WebsiteBenchmarkHandler $handler

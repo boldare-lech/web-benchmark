@@ -1,44 +1,21 @@
 {
-    "name": "symfony/website-skeleton",
     "type": "project",
-    "license": "MIT",
-    "description": "A skeleton to start a new Symfony website",
-    "minimum-stability": "dev",
+    "license": "proprietary",
     "require": {
-        "php": "^7.2.9",
+        "php": "^7.1.3",
         "ext-ctype": "*",
-        "ext-curl": "*",
         "ext-iconv": "*",
-        "sensio/framework-extra-bundle": "^5.3@dev",
-        "symfony/asset": "*",
-        "symfony/console": "*",
-        "symfony/debug": "5.0.*",
-        "symfony/dotenv": "*",
-        "symfony/expression-language": "*",
+        "ext-curl": "*",
+        "doctrine/annotations": "^1.6",
+        "symfony/console": "4.3.*",
+        "symfony/dotenv": "4.3.*",
         "symfony/flex": "^1.3.1",
-        "symfony/form": "*",
-        "symfony/framework-bundle": "*",
-        "symfony/http-client": "*",
-        "symfony/intl": "*",
-        "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
-        "symfony/process": "*",
-        "symfony/security-bundle": "*",
-        "symfony/serializer-pack": "*",
-        "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/translation": "*",
-        "symfony/twig-bundle": "*",
-        "symfony/validator": "*",
-        "symfony/web-link": "*",
-        "symfony/yaml": "*"
+        "symfony/framework-bundle": "4.3.*",
+        "symfony/validator": "4.3.*",
+        "symfony/yaml": "4.3.*"
     },
     "require-dev": {
-        "symfony/debug-pack": "*",
-        "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^5.0@dev",
-        "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*",
-        "symfony/web-server-bundle": "*"
+        "symfony/phpunit-bridge": "^4.3"
     },
     "config": {
         "preferred-install": {
@@ -60,7 +37,6 @@
         "paragonie/random_compat": "2.*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*",
         "symfony/polyfill-php71": "*",
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php56": "*"
@@ -83,7 +59,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.0.*"
+            "require": "4.3.*"
         }
     }
 }

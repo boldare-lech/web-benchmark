@@ -46,13 +46,27 @@ class WebsiteBuilder implements WebsiteBuilderInterface
 
             if (isset($this->website)) {
                 $this->website->addOtherWebsite($website);
+                $this->validate($website);
             } else {
                 $this->website = $website;
-
             }
         }
 
+        $this->validate($this->website, ['main']);
+
         return $this->website;
+    }
+
+    /**
+     * @param WebsiteInterface $website
+     */
+    protected function validate(WebsiteInterface $website, $groups = []): void
+    {
+        $violations = $this->validator->validate($website, null, $groups);
+
+        if ($violations->count()) {
+           var_dump($violations);
+        }
     }
 
 

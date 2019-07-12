@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use \Throwable;
 use \DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,12 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Website implements WebsiteInterface
 {
-    //@TODO validation by asserts
-
     /**
      * @var string
      *
-     * @Assert\Url()
+     * @Assert\Url(groups={"Default","main"})
      */
     protected $url;
 
@@ -48,6 +47,11 @@ class Website implements WebsiteInterface
      * @var Throwable
      */
     protected $exception;
+
+    /**
+     * @var ConstraintViolationListInterface
+     */
+    protected $violation;
 
     /**
      * @var DateTime
@@ -128,7 +132,7 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function setFinishLoadingTime($finishLoadingTime): WebsiteInterface
+    public function setFinishLoadingTime(float $finishLoadingTime): WebsiteInterface
     {
         $this->finishLoadingTime = $finishLoadingTime;
 
@@ -162,6 +166,26 @@ class Website implements WebsiteInterface
     {
         return $this->exception;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getViolation(): ?ConstraintViolationListInterface
+    {
+        return $this->violation;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setViolation(ConstraintViolationListInterface $violation): WebsiteInterface
+    {
+        $this->violation = $violation;
+
+        return $this;
+    }
+
+
 
     /**
      * @inheritDoc

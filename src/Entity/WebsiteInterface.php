@@ -80,6 +80,19 @@ interface WebsiteInterface
      */
     public function getException(): ?Throwable;
 
+
+    /**
+     * @return ConstraintViolationListInterface
+     */
+    public function getViolation(): ?ConstraintViolationListInterface;
+
+    /**
+     * @param ConstraintViolationListInterface $violation
+     *
+     * @return WebsiteInterface
+     */
+    public function setViolation(ConstraintViolationListInterface $violation): WebsiteInterface;
+
     /**
      * @return DateTime
      */
