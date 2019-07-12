@@ -1,7 +1,8 @@
 # web-benchmark
-Not everything from 'RECRUITMENT TASK' is DONE due priorities and some misunderstanding about time :)
+Not everything from 'RECRUITMENT TASK' is DONE 
+due priorities(commercial projects) and some misunderstanding about time :),
 so some "TODO's" are left. 
-There was a lot of work in commercial projects.  
+
 But it should be enough to show abilities.
 
 
@@ -25,7 +26,7 @@ docker-compose up -d
 When containers are up and running, execute:
 
 ```
-docker-compose exec php composer install && exit
+docker-compose exec php composer install
 ```
 
 ## Usage
