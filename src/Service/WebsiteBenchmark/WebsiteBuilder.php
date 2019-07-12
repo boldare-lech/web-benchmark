@@ -59,13 +59,14 @@ class WebsiteBuilder implements WebsiteBuilderInterface
 
     /**
      * @param WebsiteInterface $website
+     * @param array $groups
      */
-    protected function validate(WebsiteInterface $website, $groups = []): void
+    protected function validate(WebsiteInterface $website, array $groups = []): void
     {
         $violations = $this->validator->validate($website, null, $groups);
 
         if ($violations->count()) {
-           var_dump($violations);
+            $website->setViolations($violations);
         }
     }
 

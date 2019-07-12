@@ -36,15 +36,19 @@ class BenchmarkConsoleReport implements BenchmarkConsoleReportInterface
             '',
             $website->getErrors(),
         ]];
-        foreach ($website->getOtherWebsites() as $otherWebsite) {
-            assert($otherWebsite instanceof WebsiteInterface);
-            $rows[] = new TableSeparator();
-            $rows[] = [
-                $otherWebsite->getUrl(),
-                $otherWebsite->getLoadTime(),
-                $otherWebsite->diffLoadTime($website),
-                $otherWebsite->getErrors(),
-            ];
+
+        if ($website->isValid()) {
+
+            foreach ($website->getOtherWebsites() as $otherWebsite) {
+                assert($otherWebsite instanceof WebsiteInterface);
+                $rows[] = new TableSeparator();
+                $rows[] = [
+                    $otherWebsite->getUrl(),
+                    $otherWebsite->getLoadTime(),
+                    $otherWebsite->diffLoadTime($website),
+                    $otherWebsite->getErrors(),
+                ];
+            }
         }
         $table->setRows($rows);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use \Throwable;
 use \DateTime;
@@ -51,7 +52,7 @@ class Website implements WebsiteInterface
     /**
      * @var ConstraintViolationListInterface
      */
-    protected $violation;
+    protected $violations;
 
     /**
      * @var DateTime
@@ -170,17 +171,17 @@ class Website implements WebsiteInterface
     /**
      * @inheritDoc
      */
-    public function getViolation(): ?ConstraintViolationListInterface
+    public function getViolations(): ?ConstraintViolationListInterface
     {
-        return $this->violation;
+        return $this->violations;
     }
 
     /**
      * @inheritDoc
      */
-    public function setViolation(ConstraintViolationListInterface $violation): WebsiteInterface
+    public function setViolations(ConstraintViolationListInterface $violations): WebsiteInterface
     {
-        $this->violation = $violation;
+        $this->violations = $violations;
 
         return $this;
     }
@@ -234,7 +235,7 @@ class Website implements WebsiteInterface
      */
     public function diffLoadTime(WebsiteInterface $website): ?string
     {
-        if ($this->getException() || $website->getException()) {
+        if (!$this->isValid()) {
             return null;
         }
 
@@ -246,7 +247,8 @@ class Website implements WebsiteInterface
      */
     public function isValid(): bool
     {
-        if ($this->getException()) {
+        if ($this->getViolations() || $this->getException()) {
+
             return false;
         }
 
@@ -261,6 +263,17 @@ class Website implements WebsiteInterface
         if ($this->getException()) {
             return $this->getException()->getMessage();
         }
+        
+        if ($this->getViolations()) {
+            $error = '';
+            foreach ($this->getViolations() as $violation) {
+                assert($violation instanceof ConstraintViolationInterface);
+                $error .= $violation->getMessage() . PHP_EOL;
+            }
+            
+            return $error;
+        }
+        
         return '';
     }
 }

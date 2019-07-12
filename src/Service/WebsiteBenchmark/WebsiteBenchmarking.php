@@ -44,9 +44,17 @@ class WebsiteBenchmarking implements WebsiteBenchmarkingInterface
      */
     public function benchmark(WebsiteInterface $website): WebsiteInterface
     {
+        if (!$website->isValid()) {
+           return $website;
+        }
+
         $this->checkWebsite($website);
 
         foreach ($website->getOtherWebsites() as $otherWebsite) {
+            if (!$otherWebsite->isValid()) {
+                continue;
+            }
+
             $this->checkWebsite($otherWebsite);
         }
 
@@ -61,15 +69,14 @@ class WebsiteBenchmarking implements WebsiteBenchmarkingInterface
      */
     protected function checkWebsite(WebsiteInterface $website): void
     {
-        if ($website->isValid()) {
-            try {
-                $website->setStartLoadingTime(microtime(true));
-                $this->curl->connect($website->getUrl());
-                $website->setFinishLoadingTime(microtime(true));
-            } catch (Throwable $e) {
-                $website->setException($e);
-            }
+        try {
+            $website->setStartLoadingTime(microtime(true));
+            $this->curl->connect($website->getUrl());
+            $website->setFinishLoadingTime(microtime(true));
+        } catch (Throwable $e) {
+            $website->setException($e);
         }
+
     }
 
 

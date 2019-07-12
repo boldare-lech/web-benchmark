@@ -84,18 +84,18 @@ interface WebsiteInterface
     /**
      * @return ConstraintViolationListInterface
      */
-    public function getViolation(): ?ConstraintViolationListInterface;
+    public function getViolations(): ?ConstraintViolationListInterface;
 
     /**
      * @param ConstraintViolationListInterface $violation
      *
      * @return WebsiteInterface
      */
-    public function setViolation(ConstraintViolationListInterface $violation): WebsiteInterface;
+    public function setViolations(ConstraintViolationListInterface $violation): WebsiteInterface;
 
     /**
      * @return DateTime
-     */
+     *
     public function getDate(): DateTime;
 
     /**
