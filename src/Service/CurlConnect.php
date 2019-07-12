@@ -1,18 +1,16 @@
 <?php
-declare(strict_types=1);
 
 namespace App\Service;
 
 use App\Service\CurlConnectInterface;
-use Symfony\Component\Config\Definition\Exception\Exception;
+
 
 class CurlConnect implements CurlConnectInterface
 {
     private const TIMEOUT = 30;
 
     /**
-     * @param string $url
-     * @throws Exception
+     * @inheritDoc
      */
     public function connect(string $url): void
     {
@@ -24,10 +22,5 @@ class CurlConnect implements CurlConnectInterface
 
         $data = curl_exec($ch);
         curl_close($ch);
-
-        if (!$data) {
-            //@TODO message translations
-            throw new \Exception("$url could not be reached.");
-        }
     }
 }
