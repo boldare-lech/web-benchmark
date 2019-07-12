@@ -6,13 +6,19 @@ so some "TODO's" are left.
 But it should be enough to show abilities.
 
 
-##About
+## About
 Simple project for website benchmarking.
 
 
 ## Installation
 
-Clone the repository, enter the main folder and run:
+Clone the repository, 
+```
+git clone git@github.com:boldare-lech/web-benchmark.git
+```
+
+
+Enter the main folder and run:
 
 ```
 cp docker-compose.yml.dist docker-compose.yaml &&\
