@@ -36,7 +36,7 @@ docker-compose exec php composer install
 ```
 
 ## Usage
-To create benchmark execute command "app:web-benchmark https://test.pl https://test2.pl"
+To create benchmark execute command "app:web-benchmark"
 ```
 docker-compose exec php php bin/console app:web-benchmark https://www.wp.pl/ https://www.onet.pl/,https://www.interia.pl/
 ```
